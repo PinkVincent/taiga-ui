@@ -1,6 +1,11 @@
 :host {
     display: flex;
     border-radius: var(--tui-radius-m);
+
+    &[data-size='l'] {
+        border-radius: var(--tui-radius-l);
+    }
+
     text-align: start;
 
     :host-context(*:disabled) {

@@ -1,0 +1,1328 @@
+<section id="visual-parity">
+    <h2>Legacy vs new</h2>
+    <p class="note">
+        Temporary stand for visual alignment. Remove this section before merge. Each block shows sizes s / m / l, then
+        label outside where the control has it.
+    </p>
+
+    <article class="pair">
+        <h3>Input</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['text-' + size]"
+                >
+                    Type an email
+                    <input
+                        placeholder="mail@mail.ru"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Type an email
+                    </label>
+                    <input
+                        tuiTextfield
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Type an email', 'mail@mail.ru')"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, filled</span>
+                <tui-input
+                    [ngModel]="textFilled"
+                    [tuiTextfieldCleaner]="true"
+                    (ngModelChange)="textFilled = $event"
+                >
+                    Type an email
+                    <input
+                        placeholder="mail@mail.ru"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input>
+            </div>
+            <div>
+                <span class="caption">New L, filled</span>
+                <tui-textfield>
+                    <label tuiLabel>Type an email</label>
+                    <input
+                        placeholder="mail@mail.ru"
+                        tuiTextfield
+                        [ngModel]="textFilledNew"
+                        (ngModelChange)="textFilledNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-input
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['text-out']"
+                >
+                    Type an email
+                    <input
+                        placeholder="mail@mail.ru"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Type an email
+                    <tui-textfield>
+                        <input
+                            placeholder="mail@mail.ru"
+                            tuiTextfield
+                        />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>PrimitiveTextfield</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-primitive-textfield
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(value)]="primitive"
+                >
+                    Primitive
+                    <input tuiTextfieldLegacy />
+                </tui-primitive-textfield>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Primitive
+                    </label>
+                    <input
+                        tuiTextfield
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Primitive', '')"
+                        [(ngModel)]="primitiveNew"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-primitive-textfield
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldLabelOutside]="true"
+                    [(value)]="primitive"
+                >
+                    Primitive
+                    <input
+                        placeholder="Placeholder"
+                        tuiTextfieldLegacy
+                    />
+                </tui-primitive-textfield>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Primitive
+                    <tui-textfield>
+                        <input
+                            placeholder="Placeholder"
+                            tuiTextfield
+                        />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>Textarea</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-textarea
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['area-' + size]"
+                >
+                    Type a text
+                </tui-textarea>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Type a text
+                    </label>
+                    <textarea
+                        tuiTextarea
+                        [ngModel]="areaNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Type a text', 'Placeholder')"
+                        (ngModelChange)="areaNew = $event"
+                    ></textarea>
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-textarea
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['area-out']"
+                >
+                    Type a text
+                </tui-textarea>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Type a text
+                    <tui-textfield>
+                        <textarea
+                            placeholder="Placeholder"
+                            tuiTextarea
+                            [ngModel]="areaNew"
+                            (ngModelChange)="areaNew = $event"
+                        ></textarea>
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>Select</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-select
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['select-' + size]"
+                >
+                    Character
+                    <input
+                        placeholder="Choose"
+                        tuiTextfieldLegacy
+                    />
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="items"
+                    />
+                </tui-select>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    tuiChevron
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Character
+                    </label>
+                    <input
+                        tuiSelect
+                        [ngModel]="selectNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Character', 'Choose')"
+                        (ngModelChange)="selectNew = $event"
+                    />
+                    <tui-data-list-wrapper
+                        *tuiTextfieldDropdown
+                        new
+                        [items]="items"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, filled</span>
+                <tui-select
+                    [ngModel]="selectFilled"
+                    [tuiTextfieldCleaner]="true"
+                    (ngModelChange)="selectFilled = $event"
+                >
+                    Character
+                    <input tuiTextfieldLegacy />
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="items"
+                    />
+                </tui-select>
+            </div>
+            <div>
+                <span class="caption">New L, filled</span>
+                <tui-textfield tuiChevron>
+                    <label tuiLabel>Character</label>
+                    <input
+                        tuiSelect
+                        [ngModel]="selectFilledNew"
+                        (ngModelChange)="selectFilledNew = $event"
+                    />
+                    <tui-data-list-wrapper
+                        *tuiTextfieldDropdown
+                        new
+                        [items]="items"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-select
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['select-out']"
+                >
+                    Character
+                    <input
+                        placeholder="Choose"
+                        tuiTextfieldLegacy
+                    />
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="items"
+                    />
+                </tui-select>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Character
+                    <tui-textfield tuiChevron>
+                        <input
+                            placeholder="Choose"
+                            tuiSelect
+                            [ngModel]="selectNew"
+                            (ngModelChange)="selectNew = $event"
+                        />
+                        <tui-data-list-wrapper
+                            *tuiTextfieldDropdown
+                            new
+                            [items]="items"
+                        />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>MultiSelect</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-multi-select
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['multi-' + size]"
+                >
+                    Counterparties
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        tuiMultiSelectGroup
+                        [items]="items"
+                    />
+                </tui-multi-select>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <parity-new-multi
+                    placeholder="Counterparties"
+                    [insideLabel]="size !== 's'"
+                    [items]="items"
+                    [size]="size"
+                    [value]="multiNew"
+                    (valueChange)="multiNew = $event"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, filled</span>
+                <tui-multi-select
+                    [ngModel]="multiFilled"
+                    [tuiTextfieldCleaner]="true"
+                    (ngModelChange)="multiFilled = $event"
+                >
+                    Counterparties
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        tuiMultiSelectGroup
+                        [items]="items"
+                    />
+                </tui-multi-select>
+            </div>
+            <div>
+                <span class="caption">New L, filled</span>
+                <parity-new-multi
+                    [chips]="true"
+                    [items]="items"
+                    [value]="multiFilledNew"
+                    (valueChange)="multiFilledNew = $event"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-multi-select
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['multi-out']"
+                >
+                    Counterparties
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        tuiMultiSelectGroup
+                        [items]="items"
+                    />
+                </tui-multi-select>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Counterparties
+                    <parity-new-multi
+                        placeholder="Counterparties"
+                        [insideLabel]="false"
+                        [items]="items"
+                        [value]="multiNew"
+                        (valueChange)="multiNew = $event"
+                    />
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>ComboBox</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-combo-box
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['combo-' + size]"
+                >
+                    Find
+                    <input
+                        placeholder="Type a name"
+                        tuiTextfieldLegacy
+                    />
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="items"
+                    />
+                </tui-combo-box>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    tuiChevron
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Find
+                    </label>
+                    <input
+                        tuiComboBox
+                        [ngModel]="comboNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Find', 'Type a name')"
+                        (ngModelChange)="comboNew = $event"
+                    />
+                    <tui-data-list-wrapper
+                        *tuiTextfieldDropdown
+                        new
+                        [items]="items"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-combo-box
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['combo-out']"
+                >
+                    Find
+                    <input
+                        placeholder="Type a name"
+                        tuiTextfieldLegacy
+                    />
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="items"
+                    />
+                </tui-combo-box>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Find
+                    <tui-textfield tuiChevron>
+                        <input
+                            placeholder="Type a name"
+                            tuiComboBox
+                            [ngModel]="comboNew"
+                            (ngModelChange)="comboNew = $event"
+                        />
+                        <tui-data-list-wrapper
+                            *tuiTextfieldDropdown
+                            new
+                            [items]="items"
+                        />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputTag / InputChip</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-tag
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['tags-' + size]"
+                >
+                    Tags
+                </tui-input-tag>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    multi
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Tags
+                    </label>
+                    <input
+                        tuiInputChip
+                        [ngModel]="tagsNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Tags', 'Tags')"
+                        (ngModelChange)="tagsNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, filled</span>
+                <tui-input-tag
+                    [ngModel]="tagsFilled"
+                    [tuiTextfieldCleaner]="true"
+                    (ngModelChange)="tagsFilled = $event"
+                >
+                    Tags
+                </tui-input-tag>
+            </div>
+            <div>
+                <span class="caption">New L, filled</span>
+                <tui-textfield multi>
+                    <label tuiLabel>Tags</label>
+                    <input
+                        tuiInputChip
+                        [ngModel]="tagsFilledNew"
+                        (ngModelChange)="tagsFilledNew = $event"
+                    />
+                    <tui-input-chip *tuiItem />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-input-tag
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['tags-out']"
+                >
+                    Tags
+                </tui-input-tag>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Tags
+                    <tui-textfield multi>
+                        <input
+                            placeholder="Tags"
+                            tuiInputChip
+                            [ngModel]="tagsNew"
+                            (ngModelChange)="tagsNew = $event"
+                        />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputDate</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-date
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['date-' + size]"
+                >
+                    Choose a date
+                    <input tuiTextfieldLegacy />
+                </tui-input-date>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose a date
+                    </label>
+                    <input
+                        tuiInputDate
+                        [ngModel]="dateNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose a date', '')"
+                        (ngModelChange)="dateNew = $event"
+                    />
+                    <tui-calendar *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-input-date
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['date-out']"
+                >
+                    Choose a date
+                    <input
+                        placeholder="dd.mm.yyyy"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input-date>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Choose a date
+                    <tui-textfield>
+                        <input
+                            placeholder="dd.mm.yyyy"
+                            tuiInputDate
+                            [ngModel]="dateNew"
+                            (ngModelChange)="dateNew = $event"
+                        />
+                        <tui-calendar *tuiTextfieldDropdown />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputDateMulti</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-date
+                    multiple
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['dates-' + size]"
+                >
+                    Choose dates
+                </tui-input-date>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    multi
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose dates
+                    </label>
+                    <input
+                        tuiInputDateMulti
+                        [ngModel]="datesNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose dates', '')"
+                        (ngModelChange)="datesNew = $event"
+                    />
+                    <tui-calendar *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputDateRange</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-date-range
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['dateRange-' + size]"
+                >
+                    Choose dates
+                    <input tuiTextfieldLegacy />
+                </tui-input-date-range>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose dates
+                    </label>
+                    <input
+                        tuiInputDateRange
+                        [ngModel]="dateRangeNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose dates', '')"
+                        (ngModelChange)="dateRangeNew = $event"
+                    />
+                    <tui-calendar-range *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-input-date-range
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['dateRange-out']"
+                >
+                    Choose dates
+                    <input
+                        placeholder="From - To"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input-date-range>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Choose dates
+                    <tui-textfield>
+                        <input
+                            placeholder="From - To"
+                            tuiInputDateRange
+                            [ngModel]="dateRangeNew"
+                            (ngModelChange)="dateRangeNew = $event"
+                        />
+                        <tui-calendar-range *tuiTextfieldDropdown />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputDateTime</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-date-time
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['dateTime-' + size]"
+                >
+                    Choose date and time
+                    <input tuiTextfieldLegacy />
+                </tui-input-date-time>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose date and time
+                    </label>
+                    <input
+                        tuiInputDateTime
+                        [ngModel]="dateTimeNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose date and time', '')"
+                        (ngModelChange)="dateTimeNew = $event"
+                    />
+                    <tui-calendar *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-input-date-time
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['dateTime-out']"
+                >
+                    Choose date and time
+                    <input
+                        placeholder="dd.mm.yyyy, hh:mm"
+                        tuiTextfieldLegacy
+                    />
+                </tui-input-date-time>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Choose date and time
+                    <tui-textfield>
+                        <input
+                            placeholder="dd.mm.yyyy, hh:mm"
+                            tuiInputDateTime
+                            [ngModel]="dateTimeNew"
+                            (ngModelChange)="dateTimeNew = $event"
+                        />
+                        <tui-calendar *tuiTextfieldDropdown />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputMonth</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-month
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['month-' + size]"
+                >
+                    Choose a month
+                    <input tuiTextfieldLegacy />
+                </tui-input-month>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose a month
+                    </label>
+                    <input
+                        tuiInputMonth
+                        [ngModel]="monthNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose a month', '')"
+                        (ngModelChange)="monthNew = $event"
+                    />
+                    <tui-calendar-month *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputMonthRange</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-month-range
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['monthRange-' + size]"
+                >
+                    Choose a range of months
+                    <input tuiTextfieldLegacy />
+                </tui-input-month-range>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose a range of months
+                    </label>
+                    <input
+                        tuiInputMonthRange
+                        [ngModel]="monthRangeNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose a range of months', '')"
+                        (ngModelChange)="monthRangeNew = $event"
+                    />
+                    <tui-calendar-month *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputTime</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-time
+                    [items]="times"
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['time-' + size]"
+                >
+                    Input time
+                </tui-input-time>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [stringify]="stringifyTime"
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Input time
+                    </label>
+                    <input
+                        tuiInputTime
+                        [ngModel]="timeNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Input time', '')"
+                        (ngModelChange)="timeNew = $event"
+                    />
+                    <tui-data-list-wrapper
+                        *tuiTextfieldDropdown
+                        new
+                        [items]="times | tuiFilterByInput: matchTime"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputYear</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-year
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['year-' + size]"
+                >
+                    Choose a year
+                    <input tuiTextfieldLegacy />
+                </tui-input-year>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Choose a year
+                    </label>
+                    <input
+                        tuiInputYear
+                        [ngModel]="yearNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Choose a year', '')"
+                        (ngModelChange)="yearNew = $event"
+                    />
+                    <tui-calendar-year *tuiTextfieldDropdown />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputNumber</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-number
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['sum-' + size]"
+                >
+                    Enter a number
+                </tui-input-number>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Enter a number
+                    </label>
+                    <input
+                        tuiInputNumber
+                        [ngModel]="sumNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Enter a number', '')"
+                        (ngModelChange)="sumNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, filled</span>
+                <tui-input-number
+                    [ngModel]="sumFilled"
+                    [tuiTextfieldCleaner]="true"
+                    (ngModelChange)="sumFilled = $event"
+                >
+                    Enter a number
+                </tui-input-number>
+            </div>
+            <div>
+                <span class="caption">New L, filled</span>
+                <tui-textfield>
+                    <label tuiLabel>Enter a number</label>
+                    <input
+                        tuiInputNumber
+                        [ngModel]="sumFilledNew"
+                        (ngModelChange)="sumFilledNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, label outside</span>
+                <tui-input-number
+                    [tuiTextfieldLabelOutside]="true"
+                    [(ngModel)]="models['sum-out']"
+                >
+                    Enter a number
+                </tui-input-number>
+            </div>
+            <div>
+                <span class="caption">New L, label outside</span>
+                <label tuiLabel>
+                    Enter a number
+                    <tui-textfield>
+                        <input
+                            tuiInputNumber
+                            [ngModel]="sumNew"
+                            (ngModelChange)="sumNew = $event"
+                        />
+                    </tui-textfield>
+                </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputPhone</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-phone
+                    [tuiTextfieldCleaner]="true"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['phone-' + size]"
+                >
+                    Type a phone number
+                    <input tuiTextfieldLegacy />
+                </tui-input-phone>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Type a phone number
+                    </label>
+                    <input
+                        tuiInputPhone
+                        [ngModel]="phoneNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Type a phone number', '')"
+                        (ngModelChange)="phoneNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <span class="caption">Legacy L, filled</span>
+                <tui-input-phone
+                    [ngModel]="phoneFilled"
+                    [tuiTextfieldCleaner]="true"
+                    (ngModelChange)="phoneFilled = $event"
+                >
+                    Type a phone number
+                    <input tuiTextfieldLegacy />
+                </tui-input-phone>
+            </div>
+            <div>
+                <span class="caption">New L, filled</span>
+                <tui-textfield>
+                    <label tuiLabel>Type a phone number</label>
+                    <input
+                        tuiInputPhone
+                        [ngModel]="phoneFilledNew"
+                        (ngModelChange)="phoneFilledNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputRange</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-range
+                    [max]="rangeMax"
+                    [min]="rangeMin"
+                    [ngModel]="range"
+                    [quantum]="1"
+                    [steps]="rangeSteps"
+                    [tuiTextfieldSize]="size"
+                    (ngModelChange)="range = $event"
+                />
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <parity-new-range
+                    [max]="rangeMax"
+                    [min]="rangeMin"
+                    [size]="size"
+                    [value]="rangeNew"
+                    (valueChange)="rangeNew = $event"
+                />
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputSlider</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-slider
+                    [max]="rangeMax"
+                    [min]="rangeMin"
+                    [quantum]="1"
+                    [steps]="rangeSteps"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['slider-' + size]"
+                >
+                    Slider
+                </tui-input-slider>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Slider
+                    </label>
+                    <input
+                        tuiInputSlider
+                        [max]="rangeMax"
+                        [min]="rangeMin"
+                        [ngModel]="sliderNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Slider', '')"
+                        (ngModelChange)="sliderNew = $event"
+                    />
+                    <input
+                        tuiSlider
+                        type="range"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+    </article>
+
+    <article class="pair">
+        <h3>InputColor</h3>
+        <div
+            *ngFor="let size of sizes"
+            class="row"
+        >
+            <div>
+                <span class="caption">Legacy {{ size }}</span>
+                <tui-input-color
+                    [colors]="palette"
+                    [tuiTextfieldSize]="size"
+                    [(ngModel)]="models['color-' + size]"
+                >
+                    Background color
+                </tui-input-color>
+            </div>
+            <div>
+                <span class="caption">New {{ size }}</span>
+                <tui-textfield
+                    #field
+                    iconStart=" "
+                    [tuiTextfieldSize]="size"
+                >
+                    <label
+                        *ngIf="size !== 's'"
+                        tuiLabel
+                    >
+                        Background color
+                    </label>
+                    <input
+                        list="parity-colors"
+                        tuiInputColor
+                        [ngModel]="colorNew"
+                        [placeholder]="sPlaceholder(size, field.focused(), 'Background color', '#ffdd2d')"
+                        (ngModelChange)="colorNew = $event"
+                    />
+                </tui-textfield>
+            </div>
+        </div>
+        <datalist id="parity-colors">
+            <option value="#ffdd2d"></option>
+            <option value="#ff4d4d"></option>
+            <option value="#4dc3f7"></option>
+        </datalist>
+    </article>
+</section>

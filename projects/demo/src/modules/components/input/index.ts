@@ -12,6 +12,7 @@ import {type PolymorpheusContent} from '@taiga-ui/polymorpheus';
 import {ABSTRACT_PROPS_ACCESSOR} from '../abstract/abstract-props-accessor';
 import {AbstractExampleTuiControl} from '../abstract/control';
 import {InheritedDocumentation} from '../abstract/inherited-documentation';
+import {LegacyVisualParity} from './visual-parity/visual-parity.component';
 
 const LONG_TEXT_TEMPLATE = '<span>LongTextContent</span>';
 
@@ -19,6 +20,7 @@ const LONG_TEXT_TEMPLATE = '<span>LongTextContent</span>';
     standalone: true,
     imports: [
         InheritedDocumentation,
+        LegacyVisualParity,
         ReactiveFormsModule,
         TuiAmountPipe,
         TuiDemo,

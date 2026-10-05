@@ -1,6 +1,11 @@
 :host {
     display: block;
     border-radius: var(--tui-radius-m);
+
+    &[data-size='l'] {
+        border-radius: var(--tui-radius-l);
+    }
+
     text-align: start;
 
     &._disabled,
